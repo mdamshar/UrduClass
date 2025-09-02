@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment - Urdu Class Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-10 mx-auto">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="text-center mb-0">Urdu Class Assessment</h3>
+                <p class="text-center mb-0">Answer all 10 questions. You can only take this test once!</p>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    
+                    {% for field in form %}
+                        {% if field.name.startswith('question_') %}
+                            <div class="mb-4 p-3 border rounded">
+                                <h5>Question {{ loop.index }}:</h5>
+                                <p class="mb-3">{{ field.label.text }}</p>
+                                
+                                {% for choice in field %}
+                                    <div class="form-check mb-2">
+                                        {{ choice(class="form-check-input") }}
+                                        {{ choice.label(class="form-check-label") }}
+                                    </div>
+                                {% endfor %}
+                                
+                                {% if field.errors %}
+                                    <div class="text-danger mt-2">
+                                        {% for error in field.errors %}
+                                            <small>{{ error }}</small>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <div class="text-center">
+                        <div class="alert alert-warning mb-3">
+                            <strong>Warning:</strong> Make sure you have answered all questions before submitting. 
+                            You cannot retake this assessment!
+                        </div>
+                        {{ form.submit(class="btn btn-success btn-lg") }}
+                        <a href="{{ url_for('student_dashboard') }}" class="btn btn-secondary btn-lg ms-2">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Confirm before submitting
+    document.querySelector('form').addEventListener('submit', function(e) {
+        if (!confirm('Are you sure you want to submit your assessment? You cannot change your answers after submission.')) {
+            e.preventDefault();
+        }
+    });
+</script>
+{% endblock %}

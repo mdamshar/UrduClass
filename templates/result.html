@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Assessment Result{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>Assessment Results</h3>
+            </div>
+            <div class="card-body text-center">
+                <div class="mb-4">
+                    <h1 class="display-4">{{ current_user.marks }}/10</h1>
+                    <p class="lead">Your Score</p>
+                </div>
+                
+                {% if current_user.passed %}
+                    <div class="alert alert-success">
+                        <h4 class="alert-heading">Congratulations! 🎉</h4>
+                        <p class="mb-0">You have <strong>PASSED</strong> the assessment and are eligible to join the Urdu class!</p>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">Next Steps</h5>
+                            <p class="card-text">You can now proceed to enroll in the Urdu class. Contact the administration for enrollment details.</p>
+                            <div class="badge bg-success fs-6 p-2">ELIGIBLE FOR URDU CLASS</div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="alert alert-danger">
+                        <h4 class="alert-heading">Assessment Not Passed</h4>
+                        <p class="mb-0">Unfortunately, you did not meet the minimum requirement of 6/10 to pass the assessment.</p>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title">What's Next?</h5>
+                            <p class="card-text">We encourage you to study more and prepare for future opportunities. Contact the administration for study materials and guidance.</p>
+                            <div class="badge bg-danger fs-6 p-2">NOT ELIGIBLE</div>
+                        </div>
+                    </div>
+                {% endif %}
+                
+                <div class="mt-4">
+                    <h6>Assessment Details:</h6>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Total Questions</h6>
+                                    <h4>10</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Correct Answers</h6>
+                                    <h4>{{ current_user.marks }}</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card bg-light">
+                                <div class="card-body">
+                                    <h6>Pass Percentage</h6>
+                                    <h4>{{ (current_user.marks * 10)|round }}%</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        {% if current_user.passed %}
+    <p><strong>Your Result ID:</strong> {{ current_user.result_id }}</p>
+{% endif %}
+
+
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <a href="{{ url_for('student_dashboard') }}" class="btn btn-primary">Back to Dashboard</a>
+                    <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

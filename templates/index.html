@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Urdu Class Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4">Welcome to Urdu Class Portal</h1>
+            <p class="lead">A comprehensive system for student assessment and class eligibility.</p>
+            <hr class="my-4">
+            <p>Students can register, take assessments, and check their eligibility for the Urdu class. Administrators can manage questions and monitor student progress.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">For Students</h5>
+                            <p class="card-text">Register for an account and take the assessment to determine your eligibility for the Urdu class.</p>
+                            <a href="{{ url_for('student_register') }}" class="btn btn-primary">Register Now</a>
+                            <a href="{{ url_for('student_login') }}" class="btn btn-outline-primary">Login</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">For Administrators</h5>
+                            <p class="card-text">Manage questions, view student results, and monitor assessment progress.</p>
+                            <a href="{{ url_for('admin_login') }}" class="btn btn-success">Admin Login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-12">
+        <h3>How it Works</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h5>1. Register</h5>
+                    <p>Create your student account with a unique username and secure password.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h5>2. Take Assessment</h5>
+                    <p>Complete a 10-question assessment drawn randomly from the question bank.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <h5>3. Check Results</h5>
+                    <p>View your score and eligibility status for the Urdu class (pass mark: 6/10).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
